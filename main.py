@@ -111,29 +111,50 @@ def ensure_outward_normals(points, faces):
 # -----------------------------
 # Export polygonal OBJ
 # -----------------------------
-def export_polygonal_obj(points, faces, filename="waterman.obj"):
-    with open(filename, 'w') as f:
-        for v in points:
+def export_polygonal_obj(points, faces, center, filename="waterman.obj"):
+    # Collect unique vertex indices used in faces
+    used_indices = sorted(set(i for face in faces for i in face))
+    
+    # Map old indices -> new compact indices
+    index_map = {old: new for new, old in enumerate(used_indices)}
+    
+    # Reduced points array
+    used_points = points[used_indices]
+
+    with open(filename, "w") as f:        # Write only the used vertices
+        for v in used_points:
             f.write(f"v {v[0]} {v[1]} {v[2]}\n")
+        # Remap face indices
         for face in faces:
-            idxs = [str(i+1) for i in face]
-            f.write(f"f {' '.join(idxs)}\n")
-    print(f"Exported {filename} with {len(faces)} polygonal faces.")
+            new_face = [str(index_map[i] + 1) for i in face]  # +1 for OBJ indexing
+            f.write(f"f {' '.join(new_face)}\n")
+        with open(f"{filename}.txt","w") as f:
+            distances = [np.linalg.norm(v-center).astype(str) for v in used_points]
+            print(type(distances))
+            f.write("\n".join(distances))
+            f.write(f"\nmax: {max(distances)}\n")
+            f.write(f"min: {min(distances)}")
+
+
+    print(f"Exported {filename} with {len(faces)} polygonal faces "
+          f"and {len(used_points)} unique vertices.")
+
 
 # -----------------------------
 # Main
 # -----------------------------
 if __name__ == "__main__":
-    basis = FCC       # choose SC, FCC, BCC, or custom
-    limit = 20         # lattice search range
-    radius = np.sqrt(2*7)      # sphere radius
-    center = np.array([0.0,0.0,0.0], dtype=float)
+    for i in range(1, 11):
+        basis = FCC       # choose SC, FCC, BCC, or custom
+        limit = 20         # lattice search range
+        radius = np.sqrt(2*i)      # sphere radius
+        center = np.array([0.0,0.0,0.0], dtype=float)
 
-    lattice_points = generate_lattice_points(basis, limit)
-    sphere_points = filter_points(lattice_points, center, radius+1e-8)
+        lattice_points = generate_lattice_points(basis, limit)
+        sphere_points = filter_points(lattice_points, center, radius+1e-8)
+        print(len(sphere_points))
+        hull = ConvexHull(sphere_points)
+        faces = merge_coplanar_triangles(sphere_points, hull)
+        faces = ensure_outward_normals(sphere_points, faces)
 
-    hull = ConvexHull(sphere_points)
-    faces = merge_coplanar_triangles(sphere_points, hull)
-    faces = ensure_outward_normals(sphere_points, faces)
-
-    export_polygonal_obj(sphere_points, faces, filename="waterman_poly.obj")
+        export_polygonal_obj(sphere_points, faces, center, filename=f"FCC/{i}.obj")
