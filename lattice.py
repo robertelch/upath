@@ -42,9 +42,10 @@ if __name__ == "__main__":
     # Compute neighbours
     neighbours = lattice_neighbours(v1, v2, v3, a, b, c)
     neighbours2 = lattice_neighbours(v1,v2,v3,a,2,c)
-    to_lin = lambda a: [np.linalg.norm(n) for n in a]
-    print(to_lin(ndarray_to_set(neighbours))==to_lin(ndarray_to_set(neighbours2)))
+    to_lin = lambda a, P: [np.linalg.norm(n-P) for n in a]
+    print(max(to_lin(ndarray_to_set(neighbours),P))==max(to_lin(ndarray_to_set(neighbours2),P2)))
 
-    
+#    print(to_lin(ndarray_to_set(neighbours)))
+#    print(to_lin(ndarray_to_set(neighbours2)))
     print("\nMax Distance:")
     print(max([np.linalg.norm(n) for n in neighbours]))

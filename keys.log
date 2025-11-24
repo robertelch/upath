@@ -1,0 +1,125 @@
+---
+FEED '\x1b[I\x1b[?2026;0$y\x1b[?2048;0$y'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[?'
+sequence='\x1b[?2'
+sequence='\x1b[?20'
+sequence='\x1b[?202'
+sequence='\x1b[?2026'
+sequence='\x1b[?2026;'
+sequence='\x1b[?2026;0'
+sequence='\x1b[?2026;0$'
+sequence='\x1b[?2026;0$y'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[?'
+sequence='\x1b[?2'
+sequence='\x1b[?20'
+sequence='\x1b[?204'
+sequence='\x1b[?2048'
+sequence='\x1b[?2048;'
+sequence='\x1b[?2048;0'
+sequence='\x1b[?2048;0$'
+sequence='\x1b[?2048;0$y'
+InBandWindowResize(supported=False, enabled=False)
+FEED '\x1b[B'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[B'
+Key(key='down', character=None, name='down', is_printable=False)
+FEED '2'
+character='2'
+Key(key='2', character='2', name='2', is_printable=True)
+FEED 'd'
+character='d'
+Key(key='d', character='d', name='d', is_printable=True)
+FEED '\x1b[O'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[O'
+AppBlur()
+FEED '\x1b[I\x1b[O'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[O'
+AppBlur()
+FEED '\x1b[I'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+FEED '\x1b[O'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[O'
+AppBlur()
+FEED '\x1b[I'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+FEED '\x1b[O'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[O'
+AppBlur()
+FEED '\x1b[I'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+FEED '\x1b[O'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[O'
+AppBlur()
+FEED '\x1b[I'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+FEED '\x1b[O'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[O'
+AppBlur()
+FEED '\x1b[I'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+FEED '\x1b[O'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[O'
+AppBlur()
+FEED '\x1b[I'
+character='\x1b'
+sequence='\x1b['
+sequence='\x1b[I'
+AppFocus()
+FEED '\x10'
+character='\x10'
+Key(key='ctrl+p', character='\x10', name='ctrl_p', is_printable=False)
+FEED 'q'
+character='q'
+Key(key='q', character='q', name='q', is_printable=True)
+FEED 'u'
+character='u'
+Key(key='u', character='u', name='u', is_printable=True)
+FEED 'i'
+character='i'
+Key(key='i', character='i', name='i', is_printable=True)
+FEED '\r'
+character='\r'
+Key(key='enter', character='\r', name='enter', is_printable=False, aliases=['enter', 'ctrl+m'])
+FEED ''
